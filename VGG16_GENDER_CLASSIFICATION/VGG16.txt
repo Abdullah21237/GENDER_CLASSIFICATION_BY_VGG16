@@ -1,0 +1,87 @@
+Documentation Report: VGG16 Image Classification for Male and Female Face Dataset
+
+Introduction:
+
+This documentation report provides an overview and detailed explanation of the code that implements image classification using the VGG16 architecture on a dataset containing male and female images of faces. 
+The code accomplishes the following tasks:
+
+1. Data Preparation: The dataset is divided into training, validation, and test sets, and data augmentation techniques are applied to the training data.
+
+2. Model Building: A pre-trained VGG16 model is loaded, and custom layers are added to perform binary classification for distinguishing between male and female faces.
+
+3. Model Training: The model is compiled, and training is performed using the training and validation data. Early stopping is applied to prevent overfitting.
+
+4. Model Evaluation: The trained model is evaluated on the test data, and various classification metrics are calculated.
+
+Let's dive into each section in detail:
+
+Data Preparation
+
+Data Directory Structure
+
+The dataset is organized in the following directory structure:
+
+- Data Set Contain 3 Folders
+
+- `Train` contains training images.
+- `Test` contains test images.
+- `Validation` contains validation images.
+
+Data Splitting:
+
+The dataset is split into three parts:
+
+- Training Data: 70% of the data
+- Validation Data: 15% of the data
+- Test Data: 15% of the data
+
+Data Augmentation:
+
+Data augmentation is performed on the training data using the `ImageDataGenerator` from TensorFlow. 
+The following augmentations are applied:
+
+- Rescaling: Images are rescaled to values between 0 and 1.
+- Rotation: Random rotation of up to 40 degrees.
+- Width and Height Shift: Randomly shifting the width and height by up to 20%.
+- Shear Range: Random shearing.
+- Zoom Range: Random zooming.
+- Horizontal Flip: Random horizontal flipping.
+- Fill Mode: Nearest fill mode.
+
+Model Building:
+
+Base Model:
+
+The pre-trained VGG16 model is loaded with weights pre-trained on the ImageNet dataset. 
+The top classification layers of the VGG16 model are excluded.
+
+Custom Layers:
+
+Custom layers are added to the VGG16 base model for binary classification:
+
+- Global Average Pooling 2D layer.
+- A dense layer with 1024 units and ReLU activation.
+- A final dense layer with 1 unit and sigmoid activation (for binary classification).
+
+Model Training:
+
+The model is compiled using the Adam optimizer with a learning rate of 0.0001 and binary cross-entropy loss. 
+The base model layers are frozen to retain the pre-trained weights. Training is performed with early stopping to prevent overfitting. 
+The model is trained for a single epoch.
+
+Model Evaluation:
+
+The trained model is evaluated on the test data using the `evaluate` method, and accuracy is calculated. 
+Additionally, the model makes predictions on the test data, and the following classification metrics are calculated:
+
+- Accuracy : 0.85
+- Precision : 0.53
+- Recall : 0.61
+- F1-Score : 0.57
+
+A classification report is generated, which includes precision, recall, and F1-Score for each class (male and female).
+
+Conclusion:
+
+This code successfully trains and evaluates an image classification model using the VGG16 architecture on a dataset containing male and female face images. 
+The code can be further extended for fine-tuning, hyperparameter tuning, or additional evaluation and analysis as needed.
